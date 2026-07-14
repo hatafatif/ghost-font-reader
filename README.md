@@ -8,14 +8,28 @@ tool recovers it.
 Primary use is as an **MCP server**: install it, then ask your agent to read a
 ghost-font video and it answers with the message.
 
-## Quick start (MCP)
+## Quick start
 
-**Easiest:** open this repo in Claude Code and say *"set this up for me"* (or point
-it at [`SETUP.md`](SETUP.md)). The agent creates the venv, installs requirements,
-registers the MCP server, and tells you when to open a new session to decode —
-no manual setup on your part.
+**1. Clone the repo:**
 
-To do it by hand instead:
+```bash
+git clone https://github.com/hatafatif/ghost-font-reader.git
+cd ghost-font-reader
+```
+
+**2. Open it in Claude Code and say:**
+
+> Read SETUP.md and set this up for me.
+
+Your agent will walk you through it — creating the venv, installing requirements,
+and registering the MCP server, telling you what it's doing at each step. When
+it's finished it asks you to open a new session and hand it a ghost-font video,
+which it decodes and answers in text. You don't install anything yourself.
+
+---
+
+<details>
+<summary>Manual setup (if you'd rather not use an agent)</summary>
 
 **Claude Code**
 ```bash
@@ -43,6 +57,8 @@ Use absolute paths, and point `command` at the venv's Python (that's where
 > Read this ghost-font video: /path/to/message.webm
 
 The agent decodes it, reads the result, and replies with the text.
+
+</details>
 
 ### How the MCP tool behaves
 

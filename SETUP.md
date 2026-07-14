@@ -6,6 +6,19 @@ user's behalf, so the user does not have to run any setup commands themselves.
 When the user asks you to set this project up (or points you at this file),
 follow the steps below in order.
 
+## Keep the user informed at every step (required)
+
+The user should never be surprised by what you are doing. Throughout setup:
+
+- **Before each step**, say in one sentence what you are about to do and why.
+- **After each step**, report the result plainly — success, or the exact error
+  if it failed. Do not claim a step succeeded without seeing its output.
+- **Never install anything, register anything, or run a command the user hasn't
+  been told about first.** If a step needs something unexpected (e.g. a missing
+  system package, sudo), stop and explain before proceeding.
+- Keep it short and non-technical — the user is trusting you to handle the
+  details, but they should always know which of the three phases you're in.
+
 ## Step 0 — Announce the plan
 
 Before running anything, tell the user in plain language what you are about to
@@ -22,6 +35,9 @@ do. Say something equivalent to:
 Proceed once the user agrees.
 
 ## Step 1 — Create the venv and install requirements
+
+→ **Tell the user first:** "Step 1 of 3: creating a Python virtual environment and
+installing the requirements (OpenCV, NumPy, and the MCP SDK)."
 
 Run from the repository root (use the repo's own absolute path — get it with
 `pwd`; do not hardcode the example paths below):
@@ -43,6 +59,9 @@ to a system-wide install.
 
 ## Step 2 — Register the MCP server
 
+→ **Tell the user first:** "Step 2 of 3: registering the ghost-font decoder as an
+MCP server in Claude Code."
+
 Register the server with Claude Code, pointing at the **venv's** Python (that's
 where `cv2`, `numpy`, and `mcp` live) and using **absolute paths**:
 
@@ -63,6 +82,9 @@ You should see `ghost-font` marked `✔ Connected`. If it shows as failed, check
 that both paths are absolute and that Step 1's import check passed.
 
 ## Step 3 — Hand off to a new session
+
+→ **Tell the user first:** "Step 3 of 3: setup is complete — here's how to decode
+your video."
 
 The MCP tool (`decode_ghost_font`) is loaded when a Claude session **starts**, so
 it will not be available in the current session where you just registered it.
