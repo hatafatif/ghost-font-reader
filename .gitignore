@@ -11,3 +11,6 @@ venv/
 output/
 temp/
 *_decoded.png
+
+# Sample/input videos (kept local, not tracked)
+inputs/
