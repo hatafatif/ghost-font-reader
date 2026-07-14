@@ -10,7 +10,12 @@ ghost-font video and it answers with the message.
 
 ## Quick start (MCP)
 
-Install once, then use from any session.
+**Easiest:** open this repo in Claude Code and say *"set this up for me"* (or point
+it at [`SETUP.md`](SETUP.md)). The agent creates the venv, installs requirements,
+registers the MCP server, and tells you when to open a new session to decode —
+no manual setup on your part.
+
+To do it by hand instead:
 
 **Claude Code**
 ```bash
