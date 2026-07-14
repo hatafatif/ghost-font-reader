@@ -67,6 +67,50 @@ reveal, dy, score = decode_message("inputs/message1.webm")
 # score:  alignment match score (lower = more confident)
 ```
 
+## Use as an MCP server
+
+The repo ships an [MCP](https://modelcontextprotocol.io) server (`server.py`) so any
+MCP-capable agent can decode ghost-font videos on request. It exposes one tool:
+
+- **`decode_ghost_font(video_path, max_shift=40)`** — decodes the video at
+  `video_path` (a local file), writes the message image to `<video>_decoded.png`,
+  and returns a text note with that file path.
+
+The tool deliberately does **not** return the image inline (which MCP clients
+would render straight into the user's view). Instead it saves the image and tells
+the agent to open that file itself, read the message, and reply with just the
+text. The decoded image stays out of the user's sight unless it's necessary — i.e.
+the agent can't read images, in which case it hands the user the file path to open.
+
+The server does not bundle an OCR/vision model. It does the motion-based decode
+the LLM can't do, and leaves reading the (now legible) text to the agent.
+
+### Install in Claude Code
+
+```bash
+claude mcp add ghost-font -- /abs/path/to/ghost-font-reader/venv/bin/python \
+  /abs/path/to/ghost-font-reader/server.py
+```
+
+### Install in Claude Desktop
+
+Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "ghost-font": {
+      "command": "/abs/path/to/ghost-font-reader/venv/bin/python",
+      "args": ["/abs/path/to/ghost-font-reader/server.py"]
+    }
+  }
+}
+```
+
+Use absolute paths, and point `command` at the venv's Python so `cv2`, `numpy`,
+and `mcp` are available. Then just ask your agent to "read this ghost-font video"
+and give it the path.
+
 ## Project layout
 
 ```

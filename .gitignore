@@ -10,3 +10,4 @@ venv/
 # Generated output
 output/
 temp/
+*_decoded.png
